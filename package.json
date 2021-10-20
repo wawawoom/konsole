@@ -1,0 +1,23 @@
+{
+  "name": "konsole",
+  "version": "1.0.0",
+  "description": "Enhance the Chrome log console",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wawawoom/konsole.git"
+  },
+  "keywords": [
+    "console",
+    "log"
+  ],
+  "author": "Nicolas Payrouse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wawawoom/konsole/issues"
+  },
+  "homepage": "https://github.com/wawawoom/konsole#readme"
+}
