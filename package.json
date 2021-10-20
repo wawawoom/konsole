@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/wawawoom/konsole/issues"
   },
-  "homepage": "https://github.com/wawawoom/konsole#readme"
+  "homepage": "https://github.com/wawawoom/konsole#readme",
+  "dependencies": {
+    "typescript": "^4.4.4"
+  }
 }

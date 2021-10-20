@@ -1,4 +1,4 @@
-const styles = {
+const styles: any = {
   log: "background: #FFCC00; color: #000000;",
   info: "background: #7cb5e5; color: #000000;",
   success: "background: #BADA55; color: #222222;",
@@ -50,11 +50,11 @@ const styles = {
 // };
 
 const Konsole = {
-  log: (payload, name) => {
+  log: (payload: any, name: string) => {
     console.log(`%c ${name} => `, payload);
   },
-  group: (groupTitle) => {
-    console.group("%c 👉 " + groupTitle, labelTitle);
+  group: (name: string) => {
+    console.group("%c 👉 " + name, styles.title);
   },
   endGroup: () => {
     console.groupEnd();
