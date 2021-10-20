@@ -1,5 +1,5 @@
 {
-  "name": "konsole",
+  "name": "@wawawoom/konsole",
   "version": "1.0.0",
   "description": "Enhance the Chrome log console",
   "main": "index.js",
