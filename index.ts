@@ -175,7 +175,7 @@ const Konsole: IKonsole = {
   },
   fetch: (payload, name) => {
     sendGroupToConsole("FETCH", name);
-    sendToConsole({ payload, type: "SEND" });
+    sendToConsole({ payload, type: "SEND", name });
   },
 };
 
