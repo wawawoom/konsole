@@ -118,7 +118,7 @@ var Konsole = {
     },
     fetch: function (payload, name) {
         sendGroupToConsole("FETCH", name);
-        sendToConsole({ payload: payload, type: "SEND" });
+        sendToConsole({ payload: payload, type: "SEND", name: name });
     }
 };
 exports["default"] = Konsole;
