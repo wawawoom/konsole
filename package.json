@@ -1,6 +1,6 @@
 {
   "name": "@wawawoom/konsole",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Enhance the Chrome log console",
   "main": "index.js",
   "scripts": {
