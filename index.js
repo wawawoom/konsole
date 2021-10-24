@@ -19,7 +19,7 @@ var Styles;
     Styles["GROUP"] = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;";
     Styles["GROUPCOLLAPSED"] = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;";
     Styles["ICON"] = "font-size: 0.9rem;";
-    Styles["COMMON"] = "font-size: 0.65rem;\n            padding: 1px 5px 2px 5px; \n            border-radius: 5px;\n            margin-top: 0;";
+    Styles["COMMON"] = "font-size: 0.65rem;\n              padding: 1px 5px 2px 5px; \n              border-radius: 5px;\n              margin-top: 0;";
 })(Styles || (Styles = {}));
 var Icons;
 (function (Icons) {
@@ -40,22 +40,6 @@ var Icons;
     Icons["GROUP"] = "\uD83D\uDCE6";
     Icons["GROUPCOLLAPSED"] = "\uD83D\uDCE6";
 })(Icons || (Icons = {}));
-var GenericActions;
-(function (GenericActions) {
-    GenericActions["LOG"] = "\uD83D\uDCAC";
-    GenericActions["INFO"] = "\uD83C\uDF00";
-    GenericActions["SUCCESS"] = "\u2705";
-    GenericActions["ERROR"] = "\uD83D\uDE92";
-    GenericActions["GOAL"] = "\uD83C\uDFC1";
-    GenericActions["POO"] = "\uD83D\uDCA9";
-    GenericActions["PUKE"] = "\uD83E\uDD2E";
-    GenericActions["BOOM"] = "\uD83D\uDCA5";
-    GenericActions["LOVE"] = "\uD83D\uDE0D";
-    GenericActions["WARN"] = "\uD83D\uDEA8";
-    GenericActions["FIRE"] = "\uD83D\uDD25";
-    GenericActions["TIME"] = "\u23F0";
-    GenericActions["BUG"] = "\uD83D\uDC79";
-})(GenericActions || (GenericActions = {}));
 var sendToConsole = function (_a) {
     var payload = _a.payload, type = _a.type, name = _a.name;
     console.log("%c" + Icons[type] + "%c" + type + (name ? " " + name : ""), Styles.ICON, Styles.COMMON + Styles[type], payload);
@@ -66,40 +50,75 @@ var sendGroupToConsole = function (type, name) {
 var sendGroupCollapsedToConsole = function (type, name) {
     console.groupCollapsed("%c " + Icons[type] + (name ? "" + name : ""), Styles.COMMON + Styles[type]);
 };
-var Konsole = {};
-Konsole.table = console.table;
-Konsole.assert = console.assert;
-Konsole.clear = console.clear;
-Konsole.count = console.count;
-Konsole.countReset = console.countReset;
-Konsole.debug = console.debug;
-Konsole.dir = console.dir;
-Konsole.dirxml = console.dirxml;
-Konsole.table = console.table;
-Konsole.time = console.time;
-Konsole.timeEnd = console.timeEnd;
-Konsole.timeLog = console.timeLog;
-Konsole.timeStamp = console.timeStamp;
-Konsole.trace = console.trace;
-// eslint-disable-next-line
-Konsole.fetch = function (payload, name) {
-    sendGroupToConsole("FETCH", name);
-    sendToConsole({ payload: payload, type: "SEND" });
-};
-Konsole.group = function (name) {
-    sendGroupToConsole("GROUP", name);
-};
-Konsole.groupCollapsed = function (name) {
-    sendGroupCollapsedToConsole("GROUPCOLLAPSED", name);
-};
-Konsole.groupEnd = function () {
-    console.groupEnd();
-};
-Object.keys(GenericActions).forEach(function (fn) {
-    if (Number.isNaN(Number(fn))) {
-        Konsole[fn.toLowerCase()] = function (payload, name) {
-            sendToConsole({ payload: payload, type: fn, name: name });
-        };
+var Konsole = {
+    table: console.table,
+    assert: console.assert,
+    clear: console.clear,
+    count: console.count,
+    countReset: console.countReset,
+    debug: console.debug,
+    dir: console.dir,
+    dirxml: console.dirxml,
+    time: console.time,
+    timeEnd: console.timeEnd,
+    timeLog: console.timeLog,
+    timeStamp: console.timeStamp,
+    trace: console.trace,
+    groupEnd: console.groupEnd,
+    //
+    //
+    // Override some console methods
+    log: function (payload, name) {
+        sendToConsole({ payload: payload, type: "LOG", name: name });
+    },
+    info: function (payload, name) {
+        sendToConsole({ payload: payload, type: "INFO", name: name });
+    },
+    error: function (payload, name) {
+        sendToConsole({ payload: payload, type: "ERROR", name: name });
+    },
+    warn: function (payload, name) {
+        sendToConsole({ payload: payload, type: "WARN", name: name });
+    },
+    group: function (name) {
+        sendGroupToConsole("GROUP", name);
+    },
+    groupCollapsed: function (name) {
+        sendGroupCollapsedToConsole("GROUPCOLLAPSED", name);
+    },
+    //
+    //
+    // Add new methods
+    success: function (payload, name) {
+        sendToConsole({ payload: payload, type: "SUCCESS", name: name });
+    },
+    goal: function (payload, name) {
+        sendToConsole({ payload: payload, type: "GOAL", name: name });
+    },
+    poo: function (payload, name) {
+        sendToConsole({ payload: payload, type: "POO", name: name });
+    },
+    puke: function (payload, name) {
+        sendToConsole({ payload: payload, type: "PUKE", name: name });
+    },
+    boom: function (payload, name) {
+        sendToConsole({ payload: payload, type: "BOOM", name: name });
+    },
+    love: function (payload, name) {
+        sendToConsole({ payload: payload, type: "LOVE", name: name });
+    },
+    fire: function (payload, name) {
+        sendToConsole({ payload: payload, type: "FIRE", name: name });
+    },
+    bug: function (payload, name) {
+        sendToConsole({ payload: payload, type: "BUG", name: name });
+    },
+    send: function (payload, name) {
+        sendToConsole({ payload: payload, type: "SEND", name: name });
+    },
+    fetch: function (payload, name) {
+        sendGroupToConsole("FETCH", name);
+        sendToConsole({ payload: payload, type: "SEND" });
     }
-});
+};
 exports["default"] = Konsole;
