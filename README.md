@@ -73,7 +73,7 @@ Result:
 import k from "@wawawoom/konsole";
 
 try {
-  const url = "http://mockbin.com/request?foo=bar&foo=baz";
+  const url = "http://mockb in.com/request?foo=bar&foo=baz";
   const headers = {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
@@ -81,21 +81,19 @@ try {
   k.fetch({ url, headers }, "mockbin with success");
   const get = await fetch(url, { headers });
   const response = await get.json();
-  k.success(response);
-  k.groupEnd();
+  k.fetchSuccess(response);
 } catch (error) {
-  k.error({ error });
-  k.groupEnd();
+  k.fetchError({ error });
 }
 ```
 
 Result in case of success :
 
-![image](https://user-images.githubusercontent.com/2874281/138958361-4f130b9c-1ee3-4f59-beb4-049df5a8a30b.png)
+![image](https://user-images.githubusercontent.com/2874281/138960340-1f1fcbe5-97ba-4bc7-8b05-cdd96c1e692d.png)
 
 Result in case of error :
 
-![image](https://user-images.githubusercontent.com/2874281/138958701-b85f1709-30f2-4e74-bccf-d0c6140e9667.png)
+![image](https://user-images.githubusercontent.com/2874281/138960523-ad0a183e-8507-416d-950a-5a8095cc1d0d.png)
 
 ### Group logs
 
