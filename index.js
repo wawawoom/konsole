@@ -19,7 +19,7 @@ var Styles;
     Styles["GROUP"] = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;";
     Styles["GROUPCOLLAPSED"] = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;";
     Styles["ICON"] = "font-size: 0.9rem;";
-    Styles["COMMON"] = "font-size: 0.65rem;\n              padding: 1px 5px 2px 5px; \n              border-radius: 5px;\n              margin-top: 0;";
+    Styles["COMMON"] = "font-size: 0.65rem; padding: 1px 5px 2px 5px; border-radius: 5px;margin-top: 0;";
 })(Styles || (Styles = {}));
 var Icons;
 (function (Icons) {
@@ -42,7 +42,7 @@ var Icons;
 })(Icons || (Icons = {}));
 var sendToConsole = function (_a) {
     var payload = _a.payload, type = _a.type, name = _a.name;
-    console.log("%c" + Icons[type] + "%c" + type + (name ? " " + name : ""), Styles.ICON, Styles.COMMON + Styles[type], payload);
+    console.log("%c" + Icons[type] + "%c" + type + (name ? " " + name : ""), Styles.ICON, Styles.COMMON + " " + Styles[type], payload);
 };
 var sendGroupToConsole = function (type, name) {
     console.group("%c " + Icons[type] + (type === "FETCH" ? "FETCH: " : "") + (name ? "" + name : ""), Styles.COMMON + Styles[type]);
@@ -119,6 +119,14 @@ var Konsole = {
     fetch: function (payload, name) {
         sendGroupToConsole("FETCH", name);
         sendToConsole({ payload: payload, type: "SEND", name: name });
+    },
+    fetchSuccess: function (payload, name) {
+        sendToConsole({ payload: payload, type: "SUCCESS", name: name });
+        console.groupEnd();
+    },
+    fetchError: function (payload, name) {
+        sendToConsole({ payload: payload, type: "ERROR", name: name });
+        console.groupEnd();
     }
 };
 exports["default"] = Konsole;
