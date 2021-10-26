@@ -16,10 +16,7 @@ enum Styles {
   GROUP = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;",
   GROUPCOLLAPSED = "color: #FFFFFF; background-color: #000000; padding: 3px 5px 4px 0; font-size: 0.8rem;",
   ICON = "font-size: 0.9rem;",
-  COMMON = `font-size: 0.65rem;
-              padding: 1px 5px 2px 5px; 
-              border-radius: 5px;
-              margin-top: 0;`,
+  COMMON = "font-size: 0.65rem; padding: 1px 5px 2px 5px; border-radius: 5px;margin-top: 0;",
 }
 
 enum Icons {
@@ -72,6 +69,8 @@ interface IKonsole {
   bug: (payload: any, name?: string) => void;
   send: (payload: any, name?: string) => void;
   fetch: (payload: any, name?: string) => void;
+  fetchSuccess: (payload: any, name?: string) => void;
+  fetchError: (payload: any, name?: string) => void;
 }
 
 const sendToConsole = ({
@@ -86,7 +85,7 @@ const sendToConsole = ({
   console.log(
     `%c${Icons[type as keyof typeof Icons]}%c${type}${name ? ` ${name}` : ""}`,
     Styles.ICON,
-    Styles.COMMON + Styles[type as keyof typeof Styles],
+    `${Styles.COMMON} ${Styles[type as keyof typeof Styles]}`,
     payload
   );
 };
@@ -176,6 +175,14 @@ const Konsole: IKonsole = {
   fetch: (payload, name) => {
     sendGroupToConsole("FETCH", name);
     sendToConsole({ payload, type: "SEND", name });
+  },
+  fetchSuccess: (payload, name) => {
+    sendToConsole({ payload, type: "SUCCESS", name });
+    console.groupEnd();
+  },
+  fetchError: (payload, name) => {
+    sendToConsole({ payload, type: "ERROR", name });
+    console.groupEnd();
   },
 };
 
