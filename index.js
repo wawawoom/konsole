@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Styles;
 (function (Styles) {
     Styles["LOG"] = "color: #FFFFFF; background-color: #8f8f8f;";
@@ -42,7 +42,13 @@ var Icons;
 })(Icons || (Icons = {}));
 var sendToConsole = function (_a) {
     var payload = _a.payload, type = _a.type, name = _a.name;
-    console.log("%c" + Icons[type] + "%c" + type + (name ? " " + name : ""), Styles.ICON, Styles.COMMON + " " + Styles[type], payload);
+    console[type === "ERROR" && typeof console.error === "function"
+        ? "error"
+        : type === "INFO" && typeof console.info === "function"
+            ? "info"
+            : type === "WARN" && typeof console.warn === "function"
+                ? "warn"
+                : "log"]("%c" + Icons[type] + "%c" + type + (name ? " " + name : ""), Styles.ICON, Styles.COMMON + " " + Styles[type], payload);
 };
 var sendGroupToConsole = function (type, name) {
     console.group("%c " + Icons[type] + (type === "FETCH" ? "FETCH: " : "") + (name ? "" + name : ""), Styles.COMMON + Styles[type]);
@@ -127,6 +133,6 @@ var Konsole = {
     fetchError: function (payload, name) {
         sendToConsole({ payload: payload, type: "ERROR", name: name });
         console.groupEnd();
-    }
+    },
 };
-exports["default"] = Konsole;
+exports.default = Konsole;

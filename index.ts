@@ -82,7 +82,15 @@ const sendToConsole = ({
   type: string;
   name?: string;
 }): void => {
-  console.log(
+  console[
+    type === "ERROR" && typeof console.error === "function"
+      ? "error"
+      : type === "INFO" && typeof console.info === "function"
+      ? "info"
+      : type === "WARN" && typeof console.warn === "function"
+      ? "warn"
+      : "log"
+  ](
     `%c${Icons[type as keyof typeof Icons]}%c${type}${name ? ` ${name}` : ""}`,
     Styles.ICON,
     `${Styles.COMMON} ${Styles[type as keyof typeof Styles]}`,
